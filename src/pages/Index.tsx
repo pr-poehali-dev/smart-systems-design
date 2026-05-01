@@ -295,10 +295,10 @@ function Navbar() {
       <div className="container flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-[var(--neon)] flex items-center justify-center">
-            <span className="text-white font-display font-bold text-sm">SH</span>
+            <span className="text-white font-display font-bold text-sm">SA</span>
           </div>
           <span className="font-display text-xl font-semibold tracking-wide">
-            Smart<span className="neon-text">Home</span> Pro
+            Smart-<span className="neon-text">Assistant</span>.Pro
           </span>
         </a>
 
@@ -378,13 +378,13 @@ function HeroSection() {
             </div>
 
             <h1 className="font-display text-5xl lg:text-7xl font-bold leading-tight mb-6 tracking-wide">
-              ВАШ ДОМ —<br />
+              ВАША УСАДЬБА —<br />
               <span className="neon-text">УМНЕЕ</span><br />
               <span className="text-white/40">ЧЕМ КОГДА-ЛИБО</span>
             </h1>
 
             <p className="font-body text-white/55 text-lg leading-relaxed mb-8 max-w-lg">
-              Проектируем и устанавливаем интеллектуальные системы для дома и бизнеса. Управляйте всем с одного устройства.
+              Проектируем и устанавливаем интеллектуальные системы для дома и бизнеса.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
