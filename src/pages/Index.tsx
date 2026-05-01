@@ -5,6 +5,8 @@ const HERO_IMAGE = "https://cdn.poehali.dev/projects/0db94cce-5718-405d-8290-4ba
 const DASHBOARD_IMAGE = "https://cdn.poehali.dev/projects/0db94cce-5718-405d-8290-4ba3fb6628a5/files/7f07d495-5fa8-4cf6-b873-81397cc8f22d.jpg";
 const IRRIGATION_IMAGE = "https://cdn.poehali.dev/projects/0db94cce-5718-405d-8290-4ba3fb6628a5/files/da3ac77f-8d7f-4cfe-92cf-1324ecb24344.jpg";
 
+const ACCENT = "#7c3aed";
+
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -67,40 +69,44 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
     <svg viewBox="0 0 400 340" className="w-full h-full">
       <defs>
         <pattern id="bgGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M20 0L0 0 0 20" fill="none" stroke="rgba(0,245,255,0.05)" strokeWidth="0.5" />
+          <path d="M20 0L0 0 0 20" fill="none" stroke="rgba(124,58,237,0.06)" strokeWidth="0.5" />
         </pattern>
         <filter id="glow">
           <feGaussianBlur stdDeviation="2.5" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
         <linearGradient id="bldGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1e2d4a" />
-          <stop offset="100%" stopColor="#0d1525" />
+          <stop offset="0%" stopColor="#1a1a3e" />
+          <stop offset="100%" stopColor="#0d0d20" />
         </linearGradient>
         <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#162035" />
-          <stop offset="100%" stopColor="#0d1525" />
+          <stop offset="0%" stopColor="#14142e" />
+          <stop offset="100%" stopColor="#0d0d20" />
+        </linearGradient>
+        <linearGradient id="accentLine" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#7c3aed" />
+          <stop offset="100%" stopColor="#3b82f6" />
         </linearGradient>
       </defs>
 
       <rect width="400" height="340" fill="url(#bgGrid)" />
 
       {/* Ground */}
-      <rect x="20" y="295" width="360" height="5" rx="2.5" fill="rgba(0,245,255,0.12)" />
+      <rect x="20" y="295" width="360" height="5" rx="2.5" fill="rgba(124,58,237,0.15)" />
 
       {/* Main building */}
-      <rect x="75" y="115" width="250" height="180" rx="3" fill="url(#bldGrad)" stroke="rgba(0,245,255,0.25)" strokeWidth="1.5" />
+      <rect x="75" y="115" width="250" height="180" rx="3" fill="url(#bldGrad)" stroke="rgba(124,58,237,0.3)" strokeWidth="1.5" />
 
       {/* Roof */}
-      <polygon points="55,115 200,42 345,115" fill="url(#roofGrad)" stroke="rgba(0,245,255,0.35)" strokeWidth="1.5" />
+      <polygon points="55,115 200,42 345,115" fill="url(#roofGrad)" stroke="rgba(59,130,246,0.4)" strokeWidth="1.5" />
 
       {/* Windows row 1 */}
       {[100, 148, 196, 244, 292].map((x, i) => {
         const lit = isLight && step > i;
         return (
           <rect key={`w1-${i}`} x={x} y={138} width={26} height={20} rx={2}
-            fill={lit ? "rgba(255,235,80,0.75)" : "rgba(0,245,255,0.07)"}
-            stroke={lit ? "rgba(255,235,80,0.95)" : "rgba(0,245,255,0.18)"}
+            fill={lit ? "rgba(255,235,80,0.75)" : "rgba(124,58,237,0.07)"}
+            stroke={lit ? "rgba(255,235,80,0.95)" : "rgba(124,58,237,0.25)"}
             strokeWidth={1}
             style={{ filter: lit ? "drop-shadow(0 0 7px rgba(255,235,80,0.9))" : "none" }}
           />
@@ -112,8 +118,8 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
         const lit = isLight && step > i + 1;
         return (
           <rect key={`w2-${i}`} x={x} y={175} width={26} height={20} rx={2}
-            fill={lit ? "rgba(255,235,80,0.55)" : "rgba(0,245,255,0.07)"}
-            stroke={lit ? "rgba(255,235,80,0.8)" : "rgba(0,245,255,0.18)"}
+            fill={lit ? "rgba(255,235,80,0.55)" : "rgba(124,58,237,0.07)"}
+            stroke={lit ? "rgba(255,235,80,0.8)" : "rgba(124,58,237,0.25)"}
             strokeWidth={1}
             style={{ filter: lit ? "drop-shadow(0 0 5px rgba(255,235,80,0.7))" : "none" }}
           />
@@ -125,8 +131,8 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
         const lit = isLight && step > i + 2;
         return (
           <rect key={`w3-${i}`} x={x} y={212} width={26} height={20} rx={2}
-            fill={lit ? "rgba(255,235,80,0.4)" : "rgba(0,245,255,0.07)"}
-            stroke={lit ? "rgba(255,235,80,0.65)" : "rgba(0,245,255,0.18)"}
+            fill={lit ? "rgba(255,235,80,0.4)" : "rgba(124,58,237,0.07)"}
+            stroke={lit ? "rgba(255,235,80,0.65)" : "rgba(124,58,237,0.25)"}
             strokeWidth={1}
           />
         );
@@ -134,20 +140,20 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
 
       {/* Door */}
       <rect x={174} y={252} width={52} height={43} rx={3}
-        fill="rgba(0,245,255,0.04)" stroke="rgba(0,245,255,0.28)" strokeWidth={1.5} />
-      <line x1={200} y1={252} x2={200} y2={295} stroke="rgba(0,245,255,0.2)" strokeWidth={1} />
+        fill="rgba(124,58,237,0.06)" stroke="rgba(124,58,237,0.35)" strokeWidth={1.5} />
+      <line x1={200} y1={252} x2={200} y2={295} stroke="rgba(124,58,237,0.2)" strokeWidth={1} />
 
       {/* ── LIGHTING ── */}
       {isLight && (
         <g filter="url(#glow)">
-          <circle cx={200} cy={68} r={step > 0 ? 9 : 0} fill="#00f5ff"
+          <circle cx={200} cy={68} r={step > 0 ? 9 : 0} fill="#7c3aed"
             style={{ transition: "r 0.3s ease" }} />
-          {step > 0 && <text x={200} y={34} textAnchor="middle" fill="#00f5ff" fontSize={10} fontFamily="Golos Text">Хаб освещения</text>}
-          {step > 0 && <line x1={200} y1={68} x2={113} y2={138} stroke="#00f5ff" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
-          {step > 1 && <line x1={200} y1={68} x2={161} y2={138} stroke="#00f5ff" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
-          {step > 2 && <line x1={200} y1={68} x2={209} y2={138} stroke="#00f5ff" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
-          {step > 3 && <line x1={200} y1={68} x2={257} y2={138} stroke="#00f5ff" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
-          {step > 4 && <line x1={200} y1={68} x2={305} y2={138} stroke="#00f5ff" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
+          {step > 0 && <text x={200} y={34} textAnchor="middle" fill="#7c3aed" fontSize={10} fontFamily="Golos Text">Хаб освещения</text>}
+          {step > 0 && <line x1={200} y1={68} x2={113} y2={138} stroke="#7c3aed" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
+          {step > 1 && <line x1={200} y1={68} x2={161} y2={138} stroke="#7c3aed" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
+          {step > 2 && <line x1={200} y1={68} x2={209} y2={138} stroke="#7c3aed" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
+          {step > 3 && <line x1={200} y1={68} x2={257} y2={138} stroke="#7c3aed" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
+          {step > 4 && <line x1={200} y1={68} x2={305} y2={138} stroke="#7c3aed" strokeWidth={1.5} strokeDasharray="5 3" opacity={0.7} />}
         </g>
       )}
 
@@ -156,30 +162,30 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
         <g filter="url(#glow)">
           {step > 0 && (
             <>
-              <circle cx={200} cy={295} r={6} fill="#00f5ff" />
-              <line x1={200} y1={295} x2={60} y2={295} stroke="#00f5ff" strokeWidth={2.5} opacity={0.8} />
-              <line x1={200} y1={295} x2={340} y2={295} stroke="#00f5ff" strokeWidth={2.5} opacity={0.8} />
+              <circle cx={200} cy={295} r={6} fill="#7c3aed" />
+              <line x1={200} y1={295} x2={60} y2={295} stroke="#7c3aed" strokeWidth={2.5} opacity={0.8} />
+              <line x1={200} y1={295} x2={340} y2={295} stroke="#7c3aed" strokeWidth={2.5} opacity={0.8} />
             </>
           )}
           {step > 1 && [65, 110, 155].map((x, i) => (
             <g key={`sp-l-${i}`}>
-              <line x1={x} y1={295} x2={x} y2={310} stroke="#00f5ff" strokeWidth={1.5} />
-              <ellipse cx={x} cy={314} rx={8} ry={4} fill="none" stroke="#00f5ff" strokeWidth={1} />
+              <line x1={x} y1={295} x2={x} y2={310} stroke="#7c3aed" strokeWidth={1.5} />
+              <ellipse cx={x} cy={314} rx={8} ry={4} fill="none" stroke="#7c3aed" strokeWidth={1} />
               {[0, 1, 2].map(d => (
-                <circle key={d} cx={x + (d - 1) * 4} cy={318 + d * 3} r={1.5} fill="#00f5ff" opacity={0.55} />
+                <circle key={d} cx={x + (d - 1) * 4} cy={318 + d * 3} r={1.5} fill="#7c3aed" opacity={0.55} />
               ))}
             </g>
           ))}
           {step > 2 && [245, 290, 335].map((x, i) => (
             <g key={`sp-r-${i}`}>
-              <line x1={x} y1={295} x2={x} y2={310} stroke="#00f5ff" strokeWidth={1.5} />
-              <ellipse cx={x} cy={314} rx={8} ry={4} fill="none" stroke="#00f5ff" strokeWidth={1} />
+              <line x1={x} y1={295} x2={x} y2={310} stroke="#7c3aed" strokeWidth={1.5} />
+              <ellipse cx={x} cy={314} rx={8} ry={4} fill="none" stroke="#7c3aed" strokeWidth={1} />
               {[0, 1, 2].map(d => (
-                <circle key={d} cx={x + (d - 1) * 4} cy={318 + d * 3} r={1.5} fill="#00f5ff" opacity={0.55} />
+                <circle key={d} cx={x + (d - 1) * 4} cy={318 + d * 3} r={1.5} fill="#7c3aed" opacity={0.55} />
               ))}
             </g>
           ))}
-          {step > 0 && <text x={200} y={34} textAnchor="middle" fill="#00f5ff" fontSize={10} fontFamily="Golos Text">Система полива</text>}
+          {step > 0 && <text x={200} y={34} textAnchor="middle" fill="#7c3aed" fontSize={10} fontFamily="Golos Text">Система полива</text>}
         </g>
       )}
 
@@ -188,19 +194,19 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
         <g filter="url(#glow)">
           {step > 0 && (
             <g transform="translate(70,107)">
-              <rect x={-11} y={-8} width={22} height={15} rx={2} fill="#00f5ff" opacity={0.9} />
-              <polygon points="11,-5 22,-9 22,7 11,5" fill="#00f5ff" opacity={0.75} />
+              <rect x={-11} y={-8} width={22} height={15} rx={2} fill="#7c3aed" opacity={0.9} />
+              <polygon points="11,-5 22,-9 22,7 11,5" fill="#7c3aed" opacity={0.75} />
               <circle cx={0} cy={0} r={3.5} fill="#0d1525" />
-              <line x1={0} y1={7} x2={85} y2={80} stroke="#00f5ff" strokeWidth={1} strokeDasharray="4 3" opacity={0.35} />
-              <line x1={0} y1={7} x2={110} y2={25} stroke="#00f5ff" strokeWidth={1} strokeDasharray="4 3" opacity={0.35} />
+              <line x1={0} y1={7} x2={85} y2={80} stroke="#7c3aed" strokeWidth={1} strokeDasharray="4 3" opacity={0.35} />
+              <line x1={0} y1={7} x2={110} y2={25} stroke="#7c3aed" strokeWidth={1} strokeDasharray="4 3" opacity={0.35} />
             </g>
           )}
           {step > 1 && (
             <g transform="translate(330,107)">
-              <rect x={-11} y={-8} width={22} height={15} rx={2} fill="#00f5ff" opacity={0.9} />
-              <polygon points="-11,-5 -22,-9 -22,7 -11,5" fill="#00f5ff" opacity={0.75} />
+              <rect x={-11} y={-8} width={22} height={15} rx={2} fill="#7c3aed" opacity={0.9} />
+              <polygon points="-11,-5 -22,-9 -22,7 -11,5" fill="#7c3aed" opacity={0.75} />
               <circle cx={0} cy={0} r={3.5} fill="#0d1525" />
-              <line x1={0} y1={7} x2={-85} y2={80} stroke="#00f5ff" strokeWidth={1} strokeDasharray="4 3" opacity={0.35} />
+              <line x1={0} y1={7} x2={-85} y2={80} stroke="#7c3aed" strokeWidth={1} strokeDasharray="4 3" opacity={0.35} />
             </g>
           )}
           {step > 2 && (
@@ -213,12 +219,12 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
           {step > 3 && (
             <polygon
               points="70,107 200,295 330,107"
-              fill="rgba(0,245,255,0.04)"
-              stroke="rgba(0,245,255,0.12)"
+              fill="rgba(124,58,237,0.06)"
+              stroke="rgba(124,58,237,0.15)"
               strokeWidth={1}
             />
           )}
-          <text x={200} y={34} textAnchor="middle" fill="#00f5ff" fontSize={10} fontFamily="Golos Text">
+          <text x={200} y={34} textAnchor="middle" fill="#7c3aed" fontSize={10} fontFamily="Golos Text">
             {step > 0 ? "Зоны видеонаблюдения" : ""}
           </text>
         </g>
@@ -229,7 +235,7 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
         <g filter="url(#glow)">
           {step > 0 && (
             <rect x={68} y={108} width={264} height={192} rx={6}
-              fill="none" stroke="#00f5ff" strokeWidth={1.8} strokeDasharray="8 4" opacity={0.7} />
+              fill="none" stroke="#7c3aed" strokeWidth={1.8} strokeDasharray="8 4" opacity={0.7} />
           )}
           {step > 1 && [
             { x: 75, y: 115 }, { x: 325, y: 115 },
@@ -237,8 +243,8 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
             { x: 200, y: 295 },
           ].map((pos, i) => (
             <g key={`sec-${i}`}>
-              <circle cx={pos.x} cy={pos.y} r={6} fill="#00f5ff" />
-              <circle cx={pos.x} cy={pos.y} r={13} fill="none" stroke="#00f5ff" strokeWidth={1} opacity={0.35} />
+              <circle cx={pos.x} cy={pos.y} r={6} fill="#7c3aed" />
+              <circle cx={pos.x} cy={pos.y} r={13} fill="none" stroke="#7c3aed" strokeWidth={1} opacity={0.35} />
             </g>
           ))}
           {step > 2 && (
@@ -249,17 +255,17 @@ function BuildingAnimation({ activeSystem }: { activeSystem: string }) {
           )}
           {step > 3 && (
             <g>
-              <circle cx={200} cy={68} r={11} fill="none" stroke="#00f5ff" strokeWidth={2} />
-              <circle cx={200} cy={68} r={5} fill="#00f5ff" />
-              <text x={200} y={34} textAnchor="middle" fill="#00f5ff" fontSize={10} fontFamily="Golos Text">Охранный периметр</text>
+              <circle cx={200} cy={68} r={11} fill="none" stroke="#7c3aed" strokeWidth={2} />
+              <circle cx={200} cy={68} r={5} fill="#7c3aed" />
+              <text x={200} y={34} textAnchor="middle" fill="#7c3aed" fontSize={10} fontFamily="Golos Text">Охранный периметр</text>
             </g>
           )}
         </g>
       )}
 
       {/* Live badge */}
-      <circle cx={375} cy={18} r={4.5} fill="#00f5ff" style={{ animation: "light-pulse 1.5s ease-in-out infinite" }} />
-      <text x={368} y={23} textAnchor="end" fill="rgba(0,245,255,0.55)" fontSize={9} fontFamily="Golos Text">LIVE</text>
+      <circle cx={375} cy={18} r={4.5} fill="#7c3aed" style={{ animation: "light-pulse 1.5s ease-in-out infinite" }} />
+      <text x={368} y={23} textAnchor="end" fill="rgba(124,58,237,0.6)" fontSize={9} fontFamily="Golos Text">LIVE</text>
     </svg>
   );
 }
@@ -289,7 +295,7 @@ function Navbar() {
       <div className="container flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-[var(--neon)] flex items-center justify-center">
-            <span className="text-black font-display font-bold text-sm">SH</span>
+            <span className="text-white font-display font-bold text-sm">SH</span>
           </div>
           <span className="font-display text-xl font-semibold tracking-wide">
             Smart<span className="neon-text">Home</span> Pro
@@ -307,7 +313,7 @@ function Navbar() {
           ))}
         </ul>
 
-        <a href="#contacts" className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-black bg-[var(--neon)] hover:shadow-[0_0_20px_rgba(0,245,255,0.6)] transition-all duration-300">
+        <a href="#contacts" className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white bg-[var(--neon)] hover:shadow-[0_0_20px_rgba(124,58,237,0.6)] transition-all duration-300">
           Связаться
         </a>
 
@@ -327,7 +333,7 @@ function Navbar() {
               </li>
             ))}
             <li>
-              <a href="#contacts" onClick={() => setMobileOpen(false)} className="block py-2 px-4 text-center rounded-full text-black bg-[var(--neon)] font-semibold mt-2">
+              <a href="#contacts" onClick={() => setMobileOpen(false)} className="block py-2 px-4 text-center rounded-full text-white bg-[var(--neon)] font-semibold mt-2">
                 Связаться
               </a>
             </li>
@@ -382,7 +388,7 @@ function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
-              <a href="#products" className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--neon)] text-black font-semibold hover:shadow-[0_0_30px_rgba(0,245,255,0.6)] transition-all duration-300 font-body">
+              <a href="#products" className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--neon)] text-white font-semibold hover:shadow-[0_0_30px_rgba(124,58,237,0.6)] transition-all duration-300 font-body">
                 <Icon name="Zap" size={18} />
                 Посмотреть продукты
               </a>
@@ -415,7 +421,7 @@ function HeroSection() {
                   <button
                     key={s.id}
                     onClick={() => setActiveSystem(s.id)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body transition-all duration-300 ${activeSystem === s.id ? "bg-[var(--neon)] text-black font-semibold" : "neon-border text-white/60 hover:text-white"}`}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body transition-all duration-300 ${activeSystem === s.id ? "bg-[var(--neon)] text-white font-semibold" : "neon-border text-white/60 hover:text-white"}`}
                   >
                     <Icon name={s.icon} size={12} />
                     {s.label}
@@ -431,7 +437,7 @@ function HeroSection() {
                 <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--neon)] opacity-50" />
               </div>
 
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[var(--neon)] text-black text-xs font-bold px-4 py-1.5 rounded-full font-body whitespace-nowrap">
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[var(--neon)] text-white text-xs font-bold px-4 py-1.5 rounded-full font-body whitespace-nowrap">
                 Интерактивная схема установки
               </div>
             </div>
@@ -456,7 +462,7 @@ const PRODUCTS = [
     title: "Умный полив",
     desc: "Капельный полив с датчиками влажности почвы и анализом погоды. Ваш сад всегда зелёный.",
     features: ["Датчики влажности", "Погодный анализ", "Таймеры полива", "Экономия воды до 50%"],
-    color: "#00f5ff",
+    color: "#7c3aed",
     tag: "Новинка",
   },
   {
@@ -540,7 +546,7 @@ function AboutSection() {
   return (
     <section id="about" className="py-28 relative overflow-hidden">
       <div className="absolute right-0 top-0 w-1/2 h-full opacity-[0.08]"
-        style={{ background: "radial-gradient(ellipse at 100% 50%, rgba(0,245,255,0.6) 0%, transparent 70%)" }} />
+        style={{ background: "radial-gradient(ellipse at 100% 50%, rgba(124,58,237,0.5) 0%, transparent 70%)" }} />
       <div className="container relative">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div ref={ref} className="section-reveal">
@@ -670,9 +676,9 @@ function PricingCard({ plan: p, index }: { plan: typeof PLANS[0]; index: number 
   return (
     <div ref={ref}
       className={`section-reveal relative rounded-2xl p-7 transition-all duration-500 hover:-translate-y-2 glass border ${p.accent ? "border-[var(--neon)]" : "border-white/5"}`}
-      style={{ animationDelay: `${index * 0.1}s`, boxShadow: p.accent ? "0 0 40px rgba(0,245,255,0.12)" : "none" }}>
+      style={{ animationDelay: `${index * 0.1}s`, boxShadow: p.accent ? "0 0 40px rgba(124,58,237,0.15)" : "none" }}>
       {p.accent && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--neon)] text-black text-xs font-bold px-4 py-1 rounded-full font-body">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--neon)] text-white text-xs font-bold px-4 py-1 rounded-full font-body">
           РЕКОМЕНДУЕМ
         </div>
       )}
@@ -690,7 +696,7 @@ function PricingCard({ plan: p, index }: { plan: typeof PLANS[0]; index: number 
         ))}
       </ul>
       <a href="#contacts"
-        className={`block text-center py-3 rounded-full font-semibold text-sm transition-all duration-300 font-body ${p.accent ? "bg-[var(--neon)] text-black hover:shadow-[0_0_25px_rgba(0,245,255,0.6)]" : "border border-white/15 text-white hover:border-[var(--neon)] hover:text-[var(--neon)]"}`}>
+        className={`block text-center py-3 rounded-full font-semibold text-sm transition-all duration-300 font-body ${p.accent ? "bg-[var(--neon)] text-white hover:shadow-[0_0_25px_rgba(124,58,237,0.6)]" : "border border-white/15 text-white hover:border-[var(--neon)] hover:text-[var(--neon)]"}`}>
         {p.cta}
       </a>
     </div>
@@ -747,7 +753,7 @@ function BlogCard({ post: p, index }: { post: typeof POSTS[0]; index: number }) 
       <div className="relative rounded-2xl overflow-hidden mb-4">
         <img src={p.img} alt={p.title} className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        <span className="absolute top-3 left-3 text-xs px-3 py-1 rounded-full bg-[var(--neon)] text-black font-semibold font-body">{p.cat}</span>
+        <span className="absolute top-3 left-3 text-xs px-3 py-1 rounded-full bg-[var(--neon)] text-white font-semibold font-body">{p.cat}</span>
       </div>
       <div className="flex items-center gap-3 text-white/30 text-xs mb-2 font-body">
         <span>{p.date}</span><span>•</span><span>{p.read} чтения</span>
@@ -786,7 +792,7 @@ function ContactSection() {
   return (
     <section id="contacts" className="py-28 relative">
       <div className="absolute inset-0"
-        style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,245,255,0.05) 0%, transparent 70%)" }} />
+        style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(124,58,237,0.06) 0%, transparent 70%)" }} />
       <div className="container relative">
         <div ref={ref} className="section-reveal text-center mb-16">
           <p className="text-[var(--neon)] font-body text-sm tracking-widest uppercase mb-3">Обратная связь</p>
@@ -820,7 +826,7 @@ function ContactSection() {
                 <label className="block text-xs text-white/35 font-body mb-1.5 uppercase tracking-wide">Сообщение</label>
                 <textarea rows={4} placeholder="Опишите ваш проект..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[var(--neon)] transition-colors font-body resize-none placeholder:text-white/20" />
               </div>
-              <button type="submit" className="w-full py-3.5 rounded-xl bg-[var(--neon)] text-black font-bold text-sm hover:shadow-[0_0_30px_rgba(0,245,255,0.5)] transition-all duration-300 font-body flex items-center justify-center gap-2">
+              <button type="submit" className="w-full py-3.5 rounded-xl bg-[var(--neon)] text-white font-bold text-sm hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all duration-300 font-body flex items-center justify-center gap-2">
                 <Icon name="Send" size={16} />
                 Отправить заявку
               </button>
@@ -870,7 +876,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-[var(--neon)] flex items-center justify-center">
-              <span className="text-black font-display font-bold text-xs">SH</span>
+              <span className="text-white font-display font-bold text-xs">SH</span>
             </div>
             <span className="font-display text-lg">Smart<span className="neon-text">Home</span> Pro</span>
           </div>
